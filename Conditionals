@@ -1,0 +1,126 @@
+import java.util.Scanner;
+public class Main {
+    public static void Guess(int attemptNum, byte price){
+        Scanner tester = new Scanner(System.in);
+        byte attempt = tester.nextByte();
+        if(attempt == price ){
+            System.out.println("Congratulations you won");
+            attemptNum =0;
+        } else if (attempt<price && attemptNum !=0){
+            System.out.println("Guess higher you have " + --attemptNum + " attempts remaining, guess another");
+
+
+        } else if(attempt>price && attemptNum !=0){
+            System.out.println("Guess lower you have " + --attemptNum + " attempts remaining");
+
+
+        }
+        if(attemptNum ==0 && attempt == price){
+            System.out.println("Congratulations you won, perhaps you would like to try the vending machine or quiz game afterwards");
+        }else if(attemptNum == 0){
+            System.out.println("You have no more guesses remaining, try again, I have the feeling you will win");
+            System.out.println("The number was " + price + " btw..");
+        }
+
+
+    }
+    public static void main(String[] args) {
+        byte price = (byte) Math.floor(Math.random()*10);
+        Scanner tester = new Scanner(System.in);
+        System.out.println("Welcome the the program, if you want to play the Guessing game type 1, if you want to access the Vending machine type 2, if you want to play the Quiz game type 3");
+        byte choice = tester.nextByte();
+
+
+        switch (choice){
+            case 1:
+                byte prices = (byte) Math.floor(Math.random()*10);
+                System.out.println("Welcome to the Guessing game, type a number to guess the price");
+                int attentNum = 3;
+                Guess(attentNum, prices);
+                attentNum--;
+                Guess(attentNum, prices);
+                attentNum--;
+                Guess(attentNum, prices);
+
+
+                break;
+            case 2:
+                System.out.println("Welcome to the Vending Machine, input a product you want to get and an amount of money in the format $$.$$");
+                double money = tester.nextDouble();
+                System.out.println("We offer Soda at A1 for $1.5");
+                System.out.println("We offer Chips at B2 for $1.25");
+                System.out.println("We offer Candy at C3 for $0.75");
+                System.out.println("We offer Water at D4 for $1");
+                String vending = tester.next();
+                switch(vending){
+                    case "A1":
+                        if(money>= 1.5){
+                            System.out.println("Get your soda from the compartment");
+                            System.out.println("Get your change $"+ (money-1.5) + " from the compartment");
+                        }
+                        break;
+                    case "B2":
+                        if(money>= 1.25){
+                            System.out.println("Get your Chips from the compartment");
+                            System.out.println("Get your change $"+ (money-1.25) + " from the compartment");
+                        }
+                        break;
+                    case "C3":
+                        if(money>= 0.75){
+                            System.out.println("Get your Candy from the compartment");
+                            System.out.println("Get your change $"+ (money-0.75) + " from the compartment");
+                        }
+                        break;
+                    case "D4":
+                        if(money>= 1){
+                            System.out.println("Get your water from the compartment");
+                            System.out.println("Get your change $"+ (money-1) + " from the compartment");
+                        }
+                        break;
+                    default:
+                        System.out.println("We don't have other options");
+                }
+                break;
+            case 3:
+                System.out.println("Welcome to the Quiz game, if you want a Science question type 1, if you want a History question type 2, if you want a Sports question type 3");
+                byte category = tester.nextByte();
+                byte points = 0;
+                switch (category){
+                    case 1:
+                        System.out.println("What is the chemical symbol for Water?");
+                        String answer = tester.next();
+                        if(answer.equals("H2O")){
+                            points++;
+                            System.out.println("Congratulations you won, you have " + points);
+                        }else{
+                            System.out.println("Wrong, the answer was H2O");
+                        }
+                        break;
+                    case 2:
+                        System.out.println("What is the name last name of the Last king of the 'I' st bulgarian kingdom?");
+                        String answer2 = tester.next();
+                        if(answer2.equals("Vladislav")){
+                            points++;
+                            System.out.println("Congratulations you won, you have " + points);
+                        }else{
+                            System.out.println("Wrong, the answer was Vladislav");
+                        }
+                        break;
+                    case 3:
+                        System.out.println("What is the olympic sport with most disciplines?");
+                        String answer3 = tester.next();
+                        if(answer3.equals("athletics") || answer3.equals("track and field")){
+                            points++;
+                            System.out.println("Congratulations you won, you have " + points + " points");
+                        }else{
+                            System.out.println("Wrong, the answer was track and field");
+                        }
+                        break;
+                }
+                break;
+            default:
+                System.out.println("Sorry, we don't have other options");
+                break;
+        }
+    }
+}
