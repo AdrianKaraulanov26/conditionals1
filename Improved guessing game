@@ -31,10 +31,10 @@ public class Main {
                 } else if (attempt > price && attempt - price > 20) {
                     System.out.println("Guess lower, you aren't even close.");
                 }
-                if(attempts == 5){
+                if(attempts == 5  && play != false){
                     System.out.println("Ok you better make it soon");
                 }
-                if (attempts == 9) {
+                if (attempts == 9  && play != false) {
                     System.out.println("You have one attempt left, don't waste it");
                 }
                 if (attempts > 9 && play != false) {
