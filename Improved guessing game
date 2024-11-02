@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner tester = new Scanner(System.in);
+        System.out.println("Welcome to the guessing game! Enter a number and I'll tell you whether it is higher or lower compared to the one I have in mind.");
+        System.out.println("You can give up if you type 'I am a quitter'. BTW you have 10 guesses, so don't waste any of them!!");
+
+        int price = (int) Math.floor(Math.random() * 100);
+        int attempts = 0;
+        boolean play = true;
+
+        while (play) {
+            System.out.print("Let's go, you've got it: ");
+
+            if (tester.hasNextInt()) {
+                int attempt = tester.nextInt();
+                attempts++;
+                if (attempt == price) {
+                    System.out.println("Congratulations, you won!");
+                    System.out.println("The number of guesses it took you was " + attempts);
+                    play = false;
+                } else if (attempt == 100 - price || 100 - attempt == price) {
+                    System.out.println("Congrats! You found an easter egg.");
+                } else if (attempt < price && price - attempt < 20) {
+                    System.out.println("Guess higher, you are very close.");
+                } else if (attempt > price && attempt - price < 20) {
+                    System.out.println("Guess lower, you are very close.");
+                } else if (attempt < price && price - attempt > 20) {
+                    System.out.println("Guess higher, you aren't even close.");
+                } else if (attempt > price && attempt - price > 20) {
+                    System.out.println("Guess lower, you aren't even close.");
+                }
+                if(attempts == 5){
+                    System.out.println("Ok you better make it soon");
+                }
+                if (attempts == 9) {
+                    System.out.println("You have one attempt left, don't waste it");
+                }
+                if (attempts > 9 && play != false) {
+                    play = false;
+                    System.out.println("The correct number was " + price);
+                    System.out.println("Good luck next time!");
+                }
+            } else if (tester.hasNextLine()) {
+                String input = tester.nextLine();
+                if (input.equals("I am a quitter")) {
+                    play = false;
+                    System.out.println("The correct number was " + price);
+                    System.out.println("Good luck next time!");
+                } else {
+                    System.out.println("Please continue to play or, if you want to exit, type 'I am a quitter'.");
+                }
+
+            }
+        }
+    }
+}
